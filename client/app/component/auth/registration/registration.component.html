@@ -1,0 +1,33 @@
+<div id="body-wrapper">
+	<div id="main-wrapper">
+		<div id="wrapper">
+			<p id = "nameAuth">Registration</p>
+			<form (ngSubmit)="onSubmit(nameuser, emailuser, fpassword, spassword, statusPass)">
+				<div class="form-group">
+					<label for="inputEmail">Your name and surname</label>
+					<input type="text" class="form-control" id="inputEmail" placeholder="Your name and surname" required #nameuser>
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail">Email</label>
+					<input type="email" name ="memail" class="form-control" id="inputEmail" placeholder="Email" required #emailuser>
+				</div>
+
+				<div class="form-group">
+					<label for="inputPassword">Password</label>
+					<input type="password" class="form-control" id="inputPassword" placeholder="Password - at least 8 symbols" pattern="[a-zA-Z0-9_@#$%<^&*]{8,}" required #fpassword>
+				</div>
+
+				<div class="form-group">
+					<label for="inputPassword">Repeat password</label>
+					<input type="password" class="form-control" id="inputPassword" placeholder="Repeat password" pattern="[a-zA-Z0-9_@#$%<^&*]{8,}" required #spassword>
+				</div>
+				
+				<p id = "statusPass" #statusPass></p>
+				
+				<button  class="btn btn-primary"  >Regist</button>
+			</form>
+
+		</div>
+	</div>
+</div>

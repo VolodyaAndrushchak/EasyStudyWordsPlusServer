@@ -1,0 +1,92 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+	.main-content-padding {
+		padding: 0;
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 1199px) {
+	 div.opportunity1, div.opportunity2,  div.opportunity3{
+		width:100%;
+	}
+	.banner {
+		height: 250px;
+	}
+	.main-content-padding {
+		padding: 0;
+	}
+	.mc-list-sequence div.opportunity1 {
+		padding-top: 14px;
+	}
+	.mc-list-sequence div.opportunity2 {
+		padding-top: 2px;
+	}
+	.mc-list-sequence div.opportunity3 {
+		padding-top: 13px;
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 992px) {
+	.banner {
+		height: 200px;
+	}
+	.main-content-padding {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.mc-list-sequence div.opportunity2 {
+		padding-top: 0px;
+	}
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 768px) {
+	.banner {
+		height: 150px;
+	}
+	.main-content-padding {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	div.opportunity1, div.opportunity2, div.opportunity3{
+		width:70%;
+		margin: auto;
+	}
+	.mc-list-opportunity div.opportunity1 {
+		padding-bottom: 20px;
+		padding-top: 25px;
+		margin-bottom: 20px;
+	}
+	
+	.mc-list-opportunity div.opportunity2 {
+		padding-bottom: 20px;
+    	padding-top: 24px;
+		margin-bottom: 20px;
+	}
+	
+	.mc-list-opportunity div.opportunity3 {
+		padding-bottom: 22px;
+   		padding-top: 22px;
+	}
+	
+	.mc-list-sequence div.opportunity1 {
+		padding-bottom: 20px;
+		padding-top: 25px;
+		margin-bottom: 20px;
+	}
+	
+	.mc-list-sequence div.opportunity2 {
+		padding-bottom: 20px;
+    	padding-top: 24px;
+		margin-bottom: 20px;
+	}
+	
+	.mc-list-sequence div.opportunity3 {
+		padding-bottom: 22px;
+   		padding-top: 22px;
+	}
+}

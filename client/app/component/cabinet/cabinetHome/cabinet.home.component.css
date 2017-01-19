@@ -1,0 +1,193 @@
+/*---  start banner ---*/
+.banner {
+	background-image: url(../img/banner_con.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 300px;
+    
+}
+/*---  end banner ---*/
+
+/*--- start main - user data ---*/
+.user-data {
+	background-color: #f4f2f0;
+	padding-left: 4%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.user-data-p-bottom {
+	margin-bottom: 0px;
+}
+
+/*---  end main - user data ---*/
+
+/*---  start user-cards ---*/
+.user-cards {
+	background-color: rgba(239, 232, 223, 0.99);
+	padding-bottom: 30px;
+}
+.user-cards h2{
+	padding-left: 4%;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-top: 0px;
+}
+.user-cards > p {
+	padding-left: 4%;
+}
+
+.user-cards .user-card-added{
+	background-image: url(../img/pic-block.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+    height: 162px;
+}
+
+.user-card-added .uca-fon {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(94,95,165, 0.8);
+	/*opacity: 0.8;*/
+	text-align: center;
+	color: #e5d8cc;
+	font-weight: bolder;
+	font-size: 16px;
+}
+
+.user-card-added .uca-fon p {
+	margin-top: 70px;
+    text-align: center;
+	
+}
+.user-cards .user-card-added .uca-fon p {
+	/*text-indent: -18px;*/
+}
+
+.priority-card {
+	height: 29px;
+	width:29px;
+	
+	position: relative;
+    top: 5px;
+	left: 5px;
+    float: left;
+	
+	border-radius: 4px;
+	
+}
+
+.priority-card-red {
+	background-color: darkred;
+}
+.priority-card-green {
+	background-color: darkgreen;
+}
+
+.user-cards .uca-fon {
+	overflow: hidden;
+}
+
+.ucd-cross {
+	height: 16px;
+	width:16px;
+	float: right;
+	/*position: relative;
+	top: 5px;
+	right: 5px;*/
+	margin-top: -20px;
+	margin-right: 5px;
+	
+	background-image: url(../img/delete.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	transition: all 0.5s;
+}
+
+.uca-fon:hover .ucd-cross {
+	background-image: url(../img/delete-hover.png);
+	cursor: pointer;
+	margin-top: 5px;
+	
+}
+.user-cards .uca-fon .ucd-cross{
+	
+}
+
+
+.user-arrow-added-left, .user-arrow-added-right {
+	height: 162px;
+	/*background-color: #FEFEFE;*/
+	text-align: center;
+	font-size: 50px;
+	padding-top: 35px;
+	padding-left: 8px;
+}
+
+.user-arrow-added-left {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.user-arrow-added-right {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.user-arrow-added-left:hover, .user-arrow-added-right:hover{
+	background-color: rgba(177, 177, 196, 0.4);
+	cursor: pointer;
+}
+
+.user-added-main-padding {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+/*---  end user-cards  ---*/
+
+/*--- start user exist card  ---*/
+.user-exists-card {
+	background-color: #f4f2f0;
+	padding-bottom: 30px;
+}
+.user-exists-card .user-card-added{
+	background-image: url(../img/pic-block.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+    height: 162px;
+}
+
+.user-exists-card .uca-fon {
+	overflow: hidden;
+}
+.user-exists-card .uca-fon:hover{
+	cursor: pointer;
+	background-color: rgba(94,95,165, 0.7);
+}
+
+.display-card, .hidden-card {
+	text-align: center;
+}
+.uca-fon > .display-card, .uca-fon > .hidden-card {
+	 transition: all 0.5s;
+}
+
+.user-exists-card .uca-fon:hover .display-card{
+	margin-top: -100px;
+	/*background-color: #FEFEFE;*/
+}
+.hidden-card {
+	margin-top: -150px;
+}
+
+.user-exists-card .uca-fon:hover .hidden-card{
+	margin-top: 128px;
+	/*background-color: #FEFEFE;*/
+}
+
+.user-exists-card h2 {
+	padding-left: 4%;
+	padding-top: 10px;
+	margin-top: 0px;
+}
+/*---  end user exist card ---*/

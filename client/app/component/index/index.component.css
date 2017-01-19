@@ -1,0 +1,94 @@
+/*---  start banner ---*/
+.banner {
+	background-image: url(../img/banner_con.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 300px;
+    
+}
+/*---  end banner ---*/
+
+/*---start main-content  ---*/
+.main-content {
+}
+
+.mc-list-opportunity  {
+	margin-top: 30px;
+}
+.mc-list-opportunity div.opportunity1{
+	width:90%;
+	background-image: url(../img/word.png);	
+	background-repeat: no-repeat;
+	padding-left: 70px;
+	padding-bottom: 25px;
+	padding-top: 12px;
+	color: #555555;
+	
+}
+
+.mc-list-opportunity div.opportunity2{
+	width:90%;
+	background-image: url(../img/stopwatch.png);
+	background-repeat: no-repeat;
+	padding-left: 72px;
+    padding-bottom: 25px;
+	padding-top: 12px;
+	color: #555555;
+}
+
+.mc-list-opportunity div.opportunity3{
+	width:90%;
+	background-image: url(../img/goal.png);	
+	background-repeat: no-repeat;
+	padding-bottom: 25px;
+    padding-left: 72px;
+	padding-top: 3px;
+	color: #555555;
+}
+.mc-list-sequence {
+	margin-top: 24px;
+	margin-bottom: 16px;
+}
+
+.mc-list-sequence div.opportunity1{
+	width:90%;
+	background-image: url(../img/login.png);	
+	background-repeat: no-repeat;
+	padding-left: 70px;
+	padding-bottom: 21px;
+    padding-top: 24px;
+	color: #555555;
+	
+}
+
+.mc-list-sequence div.opportunity2{
+	width:90%;
+	background-image: url(../img/language.png);
+	background-repeat: no-repeat;
+	padding-left: 72px;
+    padding-bottom: 25px;
+	padding-top: 12px;
+	color: #555555;
+}
+
+.mc-list-sequence div.opportunity3{
+	width:90%;
+	background-image: url(../img/click.png);	
+	background-repeat: no-repeat;
+	padding-bottom: 25px;
+    padding-left: 72px;
+	padding-top: 3px;
+	padding-top: 20px;
+	color: #555555;
+}
+
+#mc-text-after-title, #mc-text-after-problem {
+	/*font-family: "PT Sans";*/
+	color: #555555;
+}
+#mc-text-after-title span {
+	color:darkred;
+	font-weight: bold;
+}
+
+/*---end main-content ---*/

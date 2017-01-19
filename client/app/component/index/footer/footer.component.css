@@ -1,0 +1,24 @@
+/*--- start footer ---*/
+footer {
+	height: 50px;
+	background-color: #5E5FA5;
+}
+
+footer .author{
+	float: left;
+	position: relative;
+    top: 17px;
+    color: #fff;
+}
+
+footer .feedback{
+	float: right;
+	color: #FFF;
+    position: relative;
+    top: 16px;
+	background-image: url(../img/mail.png);
+	background-repeat: no-repeat;
+	padding-left: 22px;
+    background-position-y: 2px;
+}
+/*--- end footer ---*/
