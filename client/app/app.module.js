@@ -25,13 +25,15 @@ var registration_component_1 = require('./component/auth/registration/registrati
 var login_component_1 = require('./component/auth/login/login.component');
 var forgotpassword_component_1 = require('./component/auth/forgotpassword/forgotpassword.component');
 var confirm_regist_component_1 = require('./component/auth/confirmRegist/confirm.regist.component');
+var success_registr_component_1 = require('./component/auth/successRegistr/success.registr.component');
 var routes = [
     { path: '', component: index_component_1.componentIndex },
     { path: 'cabinet', component: cabinet_component_1.componentCabinet },
     { path: 'registr', component: registration_component_1.componentRegistration },
     { path: 'login', component: login_component_1.componentLogin },
     { path: 'sendpass', component: forgotpassword_component_1.componentForgotPassword },
-    { path: 'confreg', component: confirm_regist_component_1.componentConfirmRegist }
+    { path: 'confreg', component: confirm_regist_component_1.componentConfirmRegist },
+    { path: 'registered', component: success_registr_component_1.componentSuccessRegistr }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -50,7 +52,8 @@ var AppModule = (function () {
                 registration_component_1.componentRegistration,
                 login_component_1.componentLogin,
                 forgotpassword_component_1.componentForgotPassword,
-                confirm_regist_component_1.componentConfirmRegist
+                confirm_regist_component_1.componentConfirmRegist,
+                success_registr_component_1.componentSuccessRegistr
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

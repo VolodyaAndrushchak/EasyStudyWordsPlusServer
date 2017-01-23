@@ -10,14 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var service_user_1 = require('../../../../app/services/service.user');
 var componentIndexHeader = (function () {
-    function componentIndexHeader(router) {
+    function componentIndexHeader(router, user) {
         this.router = router;
+        this.user = user;
     }
     componentIndexHeader.prototype.ngOnInit = function () {
     };
     componentIndexHeader.prototype.inCabinet = function () {
-        this.router.navigate(['cabinet']);
+        var _this = this;
+        this.user.isRegistered().subscribe(function (res) {
+            if (res.success) {
+                _this.router.navigate(['cabinet']);
+            }
+            else {
+                _this.router.navigate(['login']);
+            }
+        });
     };
     componentIndexHeader.prototype.registr = function () {
         this.router.navigate(['registr']);
@@ -31,7 +41,7 @@ var componentIndexHeader = (function () {
             templateUrl: './app/component/index/header/header.component.html',
             styleUrls: ['app/component/index/header/header.component.css', 'app/component/index/header/header.component.media.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, service_user_1.User])
     ], componentIndexHeader);
     return componentIndexHeader;
 }());

@@ -16,11 +16,54 @@ require('rxjs/add/observable/throw');
 var User = (function () {
     function User(http) {
         this.http = http;
-        this.urlSite = 'localhost:8080';
     }
-    User.prototype.isThereEmail = function (userMail) {
-        var locUrl = this.urlSite + "/isemail";
-        return this.http.get(locUrl).map(function (res) { return res.json(); });
+    User.prototype.isThereEmail = function (nameUser, passUser, userMail) {
+        //var locUrl = "/isemail";
+        var locData = {
+            nameUser: nameUser,
+            passUser: passUser,
+            emailUser: userMail
+        };
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post("/isemail", JSON.stringify(locData), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    User.prototype.confirmRegist = function (registrEmailPass) {
+        //var locUrl = "/confirmRegist";
+        var locData = {
+            pass: registrEmailPass
+        };
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post("/confirmRegist", JSON.stringify(locData), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    User.prototype.loginAction = function (userEmail, userPass, rememberme) {
+        //var locUrl = "/login";
+        var locData = {
+            useremail: userEmail,
+            password: userPass,
+            rememberme: rememberme
+        };
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post("/login", JSON.stringify(locData), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    User.prototype.isRegistered = function () {
+        //var locUrl = "/cabinet";
+        return this.http.get("/cabinet").map(function (res) { return res.json(); });
+    };
+    User.prototype.logOut = function () {
+        //var locUrl = "/logout";
+        return this.http.get("/logout").map(function (res) { return res.json(); });
+    };
+    User.prototype.getCatalogCards = function () {
+        //var locUrl = "/cabinet/getCatalog";
+        return this.http.get("/cabinet/getCatalog").map(function (res) { return res.json(); });
+    };
+    User.prototype.addCardToUserCards = function (card) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post("/cabinet/addCard", JSON.stringify({ mustAddCard: card }), { headers: headers }).map(function (res) { return res.json(); });
     };
     User = __decorate([
         core_1.Injectable(), 

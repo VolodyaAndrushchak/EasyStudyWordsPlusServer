@@ -148,7 +148,7 @@
 /*--- start user exist card  ---*/
 .user-exists-card {
 	background-color: #f4f2f0;
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 }
 .user-exists-card .user-card-added{
 	background-image: url(../img/pic-block.jpg);
@@ -174,7 +174,6 @@
 
 .user-exists-card .uca-fon:hover .display-card{
 	margin-top: -100px;
-	/*background-color: #FEFEFE;*/
 }
 .hidden-card {
 	margin-top: -150px;
@@ -189,5 +188,12 @@
 	padding-left: 4%;
 	padding-top: 10px;
 	margin-top: 0px;
+}
+
+#status-added-card {
+	margin-left: 4%;
+	margin-top: 30px;
+	color: darkred;
+	font-weight: bolder;
 }
 /*---  end user exist card ---*/

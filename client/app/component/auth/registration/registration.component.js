@@ -10,27 +10,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-/*import { User } from './app/services/service.user';*/
+var service_user_1 = require('../../../../app/services/service.user');
 var componentRegistration = (function () {
-    function componentRegistration(router /*, private user: User*/) {
+    function componentRegistration(router, user) {
         this.router = router;
+        this.user = user;
     }
     componentRegistration.prototype.ngOnInit = function () { };
     componentRegistration.prototype.onSubmit = function (name, email, fpass, spass, statusPass) {
+        var _this = this;
         console.log(statusPass.innerHTML);
         if (fpass.value != spass.value) {
             statusPass.innerHTML = "Неспівпадає комбінація паролів у полях!";
         }
         else {
+            this.user.isThereEmail(name.value, fpass.value, email.value).subscribe(function (res) {
+                if (res.ansServer) {
+                    _this.router.navigate(['confreg']);
+                }
+                else {
+                    statusPass.innerHTML = "В сервісі є вже користувач з такою електронною адресою";
+                }
+            });
         }
     };
     componentRegistration = __decorate([
         core_1.Component({
             selector: 'registration',
             templateUrl: './app/component/auth/registration/registration.component.html',
-            styleUrls: ['app/component/auth/registration/registration.component.css']
+            styleUrls: ['app/component/auth/registration/registration.component.css'],
+            providers: [service_user_1.User]
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, service_user_1.User])
     ], componentRegistration);
     return componentRegistration;
 }());

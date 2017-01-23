@@ -11,51 +11,21 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
-							<div class="user-arrow-added-left col-lg-6 col-md-6 col-sm-6 col-xs-6"><</div>
+							<div class="user-arrow-added-left col-lg-6 col-md-6 col-sm-6 col-xs-6" (click) = "leftClickAdded()"><</div>
 						</div>
 					</div>
 				</div>
 				
 				<div class="user-added-main-padding col-lg-10 col-md-10 col-sm-10 col-xs-10">
 					<div class="container-fluid">
-						<div class="row">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="row" >
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngFor = "let item of screenAddedCards">
 								<div class="user-card-added">
 									<div class="uca-fon">
 										<div class="priority-card priority-card-red">
 										</div>
 										<div class="ucd-cross"></div>
-										<p>1000 words (I level)</p> 
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<div class="user-card-added">
-									<div class="uca-fon">
-										<div class="priority-card priority-card-green">
-										</div>
-										<div class="ucd-cross"></div>
-										<p>1000 words (II level)</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<div class="user-card-added">
-									<div class="uca-fon">
-										<div class="priority-card priority-card-green">
-										</div>
-										<div class="ucd-cross"></div>
-										<p>1000 words (III level)</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<div class="user-card-added">
-									<div class="uca-fon">
-										<div class="priority-card priority-card-green">
-										</div>
-										<div class="ucd-cross"></div>
-										<p>1000 words (IV level)</p>
+										<p><!--1000 words (I level)-->{{item}}</p> 
 									</div>
 								</div>
 							</div>
@@ -66,7 +36,7 @@
 				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 					<div class="container-fluid">
 							<div class= "row">
-								<div class="user-arrow-added-right col-lg-6 col-md-6 col-sm-6 col-xs-6">></div>
+								<div class="user-arrow-added-right col-lg-6 col-md-6 col-sm-6 col-xs-6" (click) = "rightClickAdded()">></div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
 							</div>
 					</div>
@@ -84,7 +54,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
-							<div class="user-arrow-added-left col-lg-6 col-md-6 col-sm-6 col-xs-6"><</div>
+							<div class="user-arrow-added-left col-lg-6 col-md-6 col-sm-6 col-xs-6" (click) = "leftClickCatalog()"><</div>
 						</div>
 					</div>
 				</div>
@@ -92,24 +62,9 @@
 				<div class="user-added-main-padding col-lg-10 col-md-10 col-sm-10 col-xs-10">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<div class="user-card-added">
-									<div class="uca-fon"><p class = "display-card">1000 words (V level)</p> <img class = "hidden-card" src = "img/plus-button.png"></div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<div class="user-card-added">
-									<div class="uca-fon"><p class = "display-card">1000 words (VI level)</p> <img class = "hidden-card" src = "img/plus-button.png"></div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<div class="user-card-added">
-									<div class="uca-fon"><p class = "display-card">1000 words (VII level)</p> <img class = "hidden-card" src = "img/plus-button.png"></div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<div class="user-card-added">
-									<div class="uca-fon"><p class = "display-card">1000 words (VIII level)</p> <img class = "hidden-card" src = "img/plus-button.png"></div>
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngFor = "let item of screenCatalog">
+								<div class="user-card-added" (click) = "addCardToUserCards(nameCardCatalog.innerHTML, statusAddedCard)">
+									<div class="uca-fon"><p #nameCardCatalog class = "display-card">{{item}}</p> <img class = "hidden-card" src = "img/plus-button.png"></div>
 								</div>
 							</div>
 						</div>
@@ -119,11 +74,12 @@
 				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 					<div class="container-fluid">
 							<div class= "row">
-								<div class="user-arrow-added-right col-lg-6 col-md-6 col-sm-6 col-xs-6">></div>
+								<div class="user-arrow-added-right col-lg-6 col-md-6 col-sm-6 col-xs-6" (click) = "rightClickCatalog()">></div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
 							</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<p id = "status-added-card" #statusAddedCard></p>
 	</div>

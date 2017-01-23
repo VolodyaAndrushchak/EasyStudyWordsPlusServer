@@ -16,6 +16,7 @@ import { componentRegistration } from './component/auth/registration/registratio
 import { componentLogin } from './component/auth/login/login.component';
 import { componentForgotPassword } from './component/auth/forgotpassword/forgotpassword.component';
 import { componentConfirmRegist } from './component/auth/confirmRegist/confirm.regist.component';
+import { componentSuccessRegistr } from './component/auth/successRegistr/success.registr.component';
 
  const routes: Routes   = [
 	{ path: '', component: componentIndex},
@@ -23,7 +24,8 @@ import { componentConfirmRegist } from './component/auth/confirmRegist/confirm.r
 	{ path: 'registr', component: componentRegistration},
 	{ path: 'login', component: componentLogin},
 	{ path: 'sendpass', component: componentForgotPassword},
-	{ path: 'confreg', component: componentConfirmRegist}
+	{ path: 'confreg', component: componentConfirmRegist},
+	{ path: 'registered', component: componentSuccessRegistr}
 ];
 
 @NgModule({
@@ -39,7 +41,8 @@ import { componentConfirmRegist } from './component/auth/confirmRegist/confirm.r
 				 componentRegistration,
 				 componentLogin,
 				 componentForgotPassword,
-				 componentConfirmRegist
+				 componentConfirmRegist,
+				 componentSuccessRegistr
 				],
 	
   bootstrap: [AppComponent]

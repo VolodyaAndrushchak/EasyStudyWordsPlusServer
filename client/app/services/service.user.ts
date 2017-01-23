@@ -11,24 +11,64 @@ export class User {
 
 	urlSite: string; 
 
-	constructor(private http: Http) {
-		this.urlSite = 'localhost:8080';
+	constructor(private http: Http) {}
+	
+	isThereEmail(nameUser, passUser, userMail){
+		
+		//var locUrl = "/isemail";
+		var locData = {
+			nameUser: nameUser, 
+			passUser: passUser, 
+			emailUser: userMail
+		};
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post("/isemail", JSON.stringify(locData), {headers: headers}).map(res => res.json());
+		
+	}
+	
+	confirmRegist(registrEmailPass){
+		//var locUrl = "/confirmRegist";
+		var locData = {
+			pass: registrEmailPass
+		};
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post("/confirmRegist", JSON.stringify(locData), {headers: headers}).map(res => res.json());
+	}
+	
+	loginAction(userEmail, userPass, rememberme) {
+		//var locUrl = "/login";
+		var locData = {
+			useremail: userEmail,
+			password: userPass,
+			rememberme: rememberme
+		};
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post("/login", JSON.stringify(locData), {headers: headers}).map(res => res.json());
+	}
+	
+	isRegistered(){
+		//var locUrl = "/cabinet";
+		return this.http.get("/cabinet").map(res => res.json());
+	}
+	
+	logOut(){
+		//var locUrl = "/logout";
+		return this.http.get("/logout").map(res => res.json());
 	}
 	
 	
-	isThereEmail(userMail){
-		var locUrl = this.urlSite + "/isemail";
-		return this.http.get(locUrl).map(res => res.json());
+	getCatalogCards(){
+		//var locUrl = "/cabinet/getCatalog";
+		return this.http.get("/cabinet/getCatalog").map(res => res.json());
 	}
-/*
-	getGuestToken(cliend_id, cliend_secret, client_credentials) {
-		var locURL = this.urlSite + '/oauth/v2/token?client_id=' + cliend_id + '&client_secret=' + cliend_secret + '&grant_type=' + client_credentials;
-		console.log(locURL);
-		return this.http.get(locURL).map(res => {
-			console.log(res.json());
-		});
-	}
-*/
 	
+	addCardToUserCards(card){
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post("/cabinet/addCard", JSON.stringify({mustAddCard: card}), {headers: headers}).map(res => res.json());
+	}
 
 }

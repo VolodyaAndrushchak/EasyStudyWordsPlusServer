@@ -2,13 +2,13 @@
 	<div id="main-wrapper">
 		<div id="wrapper">
 				<p id = "nameAuth">Check your email</p>
-			<form>
+			<form (ngSubmit)="onSubmit(registrEmailPass, statusConfRegistr)">
 				<div class="form-group">
-					<label for="inputEmail">Ми відіслали код підтвердження на твій email, введи цей код, будь ласка, у нижнє поле:</label>
-					<input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+					<label for="inputEmail">Ми відіслали код підтвердження реєстрації на твій email, введи цей код, будь ласка, у нижнє поле:</label>
+					<input type="password" class="form-control" id="inputPassword" placeholder="Password" required #registrEmailPass>
 				</div>
-			
-				<button type="submit" class="btn btn-primary">Send code</button>
+				<p id = "statusConfRegistr" #statusConfRegistr></p>
+				<button class="btn btn-primary">Send code</button>
 			</form>
 			
 		</div>

@@ -33,3 +33,7 @@
 	text-align: center;
 	cursor: pointer;
 }
+
+#status-login {
+	color:darkred;
+}

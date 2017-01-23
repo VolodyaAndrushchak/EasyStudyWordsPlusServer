@@ -2,21 +2,21 @@
 	<div id="main-wrapper">
 		<div id="wrapper">
 				<p id = "nameAuth">Log in</p>
-			<form>
+			<form (ngSubmit) = "onSubmit(userEmail, userPassword, rememberMe, statusLogin)">
 				<div class="form-group">
 					<label for="inputEmail">Email</label>
-					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+					<input type="email" class="form-control" id="inputEmail" placeholder="Email" #userEmail required>
 				</div>
 
 				<div class="form-group">
 					<label for="inputPassword">Password</label>
-					<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+					<input type="password" class="form-control" id="inputPassword" placeholder="Password" #userPassword required>
 				</div>
 
 				<div class="checkbox">
-					<label><input type="checkbox"> Remember me</label>
+					<label><input type="checkbox" #rememberMe> Remember me</label>
 				</div>
-
+				<p id = "status-login" #statusLogin></p>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</form>
 			<p id = "fogPass"><a (click) = "sendPass()">Forgot your password?</a></p>

@@ -23,6 +23,7 @@ header .regist {
 
 .regist li {
 	float: left;
+	cursor: pointer;
 }
 
 .regist li:first-child {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
+import { User } from '../../../../app/services/service.user';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { OnInit } from '@angular/core';
 })
 
 export class componentIndexHeader implements OnInit {
-	constructor(private router: Router){
+	constructor(private router: Router, private user: User){
 		
 	}
 	
@@ -18,7 +19,15 @@ export class componentIndexHeader implements OnInit {
 	}
 	
 	inCabinet() {
-		this.router.navigate(['cabinet']);
+		this.user.isRegistered().subscribe(res => {
+			if(res.success){
+				this.router.navigate(['cabinet']);
+			}
+			else {
+				this.router.navigate(['login']);
+			}
+		});
+		
 	}
 	
 	registr() {

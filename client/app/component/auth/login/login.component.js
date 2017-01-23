@@ -10,13 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var service_user_1 = require('../../../../app/services/service.user');
 var componentLogin = (function () {
-    function componentLogin(router) {
+    function componentLogin(router, user) {
         this.router = router;
+        this.user = user;
     }
     componentLogin.prototype.ngOnInit = function () { };
     componentLogin.prototype.sendPass = function () {
         this.router.navigate(['sendpass']);
+    };
+    componentLogin.prototype.onSubmit = function (userEmail, userPass, rememberMe, statusLogin) {
+        var _this = this;
+        console.log(rememberMe.checked);
+        this.user.loginAction(userEmail.value, userPass.value, rememberMe.checked).subscribe(function (res) {
+            if (res.success) {
+                _this.router.navigate(['cabinet']);
+            }
+            else {
+                statusLogin.innerHTML = "Неправильний логін чи пароль!";
+            }
+        });
     };
     componentLogin = __decorate([
         core_1.Component({
@@ -24,7 +38,7 @@ var componentLogin = (function () {
             templateUrl: './app/component/auth/login/login.component.html',
             styleUrls: ['app/component/auth/login/login.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, service_user_1.User])
     ], componentLogin);
     return componentLogin;
 }());

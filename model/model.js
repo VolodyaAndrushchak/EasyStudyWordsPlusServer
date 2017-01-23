@@ -27,6 +27,79 @@ module.exports = function(pool){
 			pool.query("UPDATE usertablewords SET ?? = 0 WHERE id = ?", [prevCol, idWord], function(err, answerDB){
 				pool.query("UPDATE usertablewords SET ?? = 1 WHERE id = ?", [nextCol, idWord]);
 			});
+		},
+		
+		getUsingTable: function(idUser, callback){
+			var nameTable = idUser + "UsTab";
+			pool.query("SELECT nameTable FROM ?? WHERE added = 1", [nameTable], callback);
+		},
+		
+		getRealTableName: function(callback){
+			pool.query("SELECT * FROM realtablename", callback);
+		},
+		
+		createTableCard: function(iduser, card, callback){
+			pool.query("SELECT dbname FROM realtablename WHERE realname = ? LIMIT 1", [card], function(err, answerDB){
+				var tablename = iduser+answerDB[0].dbname;
+				pool.query("CREATE TABLE IF NOT EXISTS ??" + 
+						"(id int(7) unsigned NOT NULL AUTO_INCREMENT," +
+						"stnew int(1) DEFAULT NULL," +  
+						"stfamiliar int(1) DEFAULT NULL," +  
+						"stintermediate int(1) DEFAULT NULL," +  
+						"stalmostknow int(1) DEFAULT NULL," +  
+						"stknow int(1) DEFAULT NULL," +  
+						"PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8", [tablename], function(err, answerDB1){
+							pool.query("INSERT INTO ?? SELECT * FROM usertablewords", [tablename], function(err, answerDB2){
+								var nameUsingTable = iduser + "UsTab";
+								pool.query("INSERT INTO ?? (nameTable, added) VALUES (?, ?)", [nameUsingTable, card, 1], callback);
+							});					
+				});
+			});	
+		},
+		
+		
+		//model for users
+		
+		isEmail: function(user_mail, callback){
+			pool.query("SELECT * FROM users WHERE email = ?", [user_mail], callback);
+		},
+		
+		createUser: function(nameUser, passUser, emailUser, registrEmailPass, unIdUser, callback){
+			pool.query("INSERT INTO users (nameUser, password, email, registrEmailPass, unIdUser) VALUES (?, ?, ?, ?, ?)", [nameUser, passUser, emailUser, registrEmailPass, unIdUser], function(err, answerDB){
+				if(!err){
+					var nameUsingTable = unIdUser + "UsTab";
+					pool.query("CREATE TABLE IF NOT EXISTS ??" + 
+						"(nameTable varchar(40) NOT NULL," +
+						"added int(1) DEFAULT NULL," +  
+						"catalog int(1) DEFAULT NULL," +  
+						"PRIMARY KEY (nameTable)) DEFAULT CHARACTER SET utf8", [nameUsingTable], callback);
+				}
+			});
+		},
+		
+		confirmRegist: function(pass, callback){
+			pool.query("UPDATE users SET activated = 1 WHERE registrEmailPass = ?", [pass], callback);
+		},
+		
+		checkUser: function(userEmail, callback){
+			pool.query("SELECT id,  email, token, unIdUser, activated, password FROM users WHERE email = ?", [userEmail], callback);
+		},
+		
+		findUser: function(token, callback){
+			pool.query("SELECT id,  email, token, unIdUser FROM users WHERE token = ? LIMIT 1", [token], callback);
+		},
+		
+		writeToken: function(token, iduser, callback){
+			pool.query("UPDATE users SET token = ? WHERE unIdUser = ?", [token, iduser], callback);
+		},
+		writeTokenByEmail: function(token, email, callback){
+			pool.query("UPDATE users SET token = ? WHERE email = ?", [token, email], callback);
+		},
+		findUserById: function(id, callback){
+			pool.query("SELECT id, email, token, unIdUser FROM users WHERE unIdUser = ?", [id], callback);
+		},
+		delToken: function(idUser, callback){
+			pool.query("UPDATE users SET token = '' WHERE unIdUser = ?", [idUser], callback);
 		}
 	
 	}

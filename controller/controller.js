@@ -54,6 +54,34 @@ module.exports = function(model, view, request, cheerio){
 					}
 				}
 			});
+		},
+		
+		getCatalog: function(req, res){
+			model.getUsingTable(req.session.passport.user, function(err, arrUserTable){
+				if(err){ res.status(500).send({"answer": "DB problem - " + err});}
+				else {
+					model.getRealTableName(function(err, answerRealTable){
+						if(err){res.status(500).send({"answer": "DB problem - " + err});}
+						else {
+							view.getCatalog(arrUserTable, answerRealTable, function(arrCardsCatalog){
+								res.json(arrCardsCatalog);
+							});
+						}
+					});	
+				}
+			});
+		},
+		
+		addCardToUser: function(req, res){
+			model.createTableCard(req.session.passport.user, req.body.mustAddCard, function(err, answerDB){
+				console.log(err);
+				if(err){res.status(500).send({success: false});}
+				else {
+					res.status(200).send({success: true});
+				}
+			});
+			
+			//model.addCardToUser(req.body.mustAddCard, );
 		}
 	}			
 }

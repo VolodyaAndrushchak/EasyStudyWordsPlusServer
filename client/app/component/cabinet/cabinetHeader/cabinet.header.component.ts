@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { OnInit } from '@angular/core';
+import { User } from '../../../../app/services/service.user';
 
 
 @Component({
@@ -8,5 +11,13 @@ import { Component } from '@angular/core';
 })
 
 export class componentCabinetHeader {
-
+	constructor(private router:Router, private user:User){}
+	
+	logOut(){
+		this.user.logOut().subscribe(res => {
+			if(res.success){
+				this.router.navigate(['']);
+			}
+		});
+	}
 }

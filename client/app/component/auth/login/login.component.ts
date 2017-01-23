@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
-
+import { User } from '../../../../app/services/service.user';
 
 @Component({
 	selector: 'login',
@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core';
 })
 
 export class componentLogin implements OnInit{
-	constructor(private router: Router){
+	constructor(private router: Router, private user: User){
 		
 	}
 	
@@ -18,5 +18,18 @@ export class componentLogin implements OnInit{
 	
 	sendPass(){
 		this.router.navigate(['sendpass']);
+	}
+	
+	onSubmit(userEmail, userPass, rememberMe, statusLogin){
+		console.log(rememberMe.checked);
+		this.user.loginAction(userEmail.value, userPass.value, rememberMe.checked).subscribe(res => {
+			if (res.success){
+				this.router.navigate(['cabinet']);
+			}
+			else {
+				statusLogin.innerHTML = "Неправильний логін чи пароль!"
+			}
+			
+		});
 	}
 }
