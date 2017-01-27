@@ -59,18 +59,28 @@ module.exports = function(model, view, nodemailer, smtpTransport, generator, uui
 		
 		confirmRegist(req, res){
 			model.confirmRegist(req.body.pass, function(err, answerDB){
-				console.log(req.body.pass, answerDB);
 				if(answerDB.affectedRows >= 1){
 					res.status(200).send({"ansServer": true});
 				}
 				else if (answerDB.affectedRows == 0){
-					console.log(111);
 					res.json({"ansServer": false});
 				}
 			});
 		},
 		okCabinter(req, res){
 			res.send({ success : true, message : 'authentication succeeded' });
+		},
+		getUserName(req, res){
+			model.getUserName(req.session.passport.user, function(err, answerDB){
+				res.send({ nameUser : answerDB[0].nameUser});
+			});
+		},
+		
+		getPriorityCard(req, res){
+			model.getPriorityCard(req.session.passport.user, function(err, answerDB){
+				if (!err && answerDB.length > 0)
+					res.send({priorityCard: answerDB[0].nameTable});
+			});	
 		}
 	}			
 }

@@ -23,7 +23,6 @@ module.exports = function(pool){
 		},
 		
 		changeStatusWord: function(prevCol, nextCol, idWord, callback){
-			console.log(prevCol, nextCol, idWord);
 			pool.query("UPDATE usertablewords SET ?? = 0 WHERE id = ?", [prevCol, idWord], function(err, answerDB){
 				pool.query("UPDATE usertablewords SET ?? = 1 WHERE id = ?", [nextCol, idWord]);
 			});
@@ -31,7 +30,7 @@ module.exports = function(pool){
 		
 		getUsingTable: function(idUser, callback){
 			var nameTable = idUser + "UsTab";
-			pool.query("SELECT nameTable FROM ?? WHERE added = 1", [nameTable], callback);
+			pool.query("SELECT nameTable, priority FROM ??", [nameTable], callback);
 		},
 		
 		getRealTableName: function(callback){
@@ -57,6 +56,30 @@ module.exports = function(pool){
 			});	
 		},
 		
+		deleteUserCard: function(idUser, card, callback){
+			//get real name table
+			pool.query("SELECT dbname FROM realtablename WHERE realname = ?", [card], function(err, answerDB){
+				var delTableName = idUser + answerDB[0].dbname;
+				//delete table with words
+				pool.query("DROP TABLE ??", [delTableName], function(err, answerDB2){
+					var updateUsTab = idUser + "ustab";
+					//change status words
+					pool.query("DELETE FROM ?? WHERE nameTable = ?", [updateUsTab, card], callback);
+				});
+			});
+		},
+		
+		//change priority card for user
+		changePriorityCard: function(IdUser, card, callback){
+			var locNameTable = IdUser + "ustab";
+			pool.query("UPDATE ?? SET priority = null WHERE priority = 1", [locNameTable], function(err, answerDB2){
+				if(!err){
+					pool.query("UPDATE ?? SET priority = 1 WHERE nameTable = ?", [locNameTable,card], function(err,answerDB3){
+						pool.query("SELECT dbname FROM realtablename WHERE realname = ?", [card], callback);
+					}); 
+				}
+			});
+		},
 		
 		//model for users
 		
@@ -100,6 +123,13 @@ module.exports = function(pool){
 		},
 		delToken: function(idUser, callback){
 			pool.query("UPDATE users SET token = '' WHERE unIdUser = ?", [idUser], callback);
+		},
+		getUserName: function(idUser, callback){
+			pool.query("SELECT nameUser FROM users WHERE unIdUser = ?", [idUser], callback);
+		},
+		getPriorityCard: function(idUser, callback){
+			var locNameTable = idUser + "ustab";
+			pool.query("SELECT nameTable from ?? WHERE priority = 1", [locNameTable], callback);
 		}
 	
 	}

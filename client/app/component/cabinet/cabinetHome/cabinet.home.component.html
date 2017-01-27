@@ -1,10 +1,10 @@
 <div class="user-data">
-		<p>Привіт, <b>Володя Андрущак.</b></p>
+		<p>Привіт, <b #nameUser>Володя Андрущак.</b></p>
 		<p class = "user-data-p-bottom">Ви вже вивчили <span>56</span>слів, вітаємо!</p>
 	</div>
 	<div class="user-cards">
 		<h2>Твої картки</h2>
-		<p>Ваша пріорітетна карта <b>1000 words (I level)</b>.</p>
+		<p>Ваша пріорітетна карта <b #priorityCard>1000 words (I level)</b>. Для вибору пріорітетної картки клікніть на її червоний квадрат</p>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -22,10 +22,10 @@
 							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngFor = "let item of screenAddedCards">
 								<div class="user-card-added">
 									<div class="uca-fon">
-										<div class="priority-card priority-card-red">
+										<div class="priority-card priority-card-red" title = "Статус картки" [ngClass]="{'priority-card-green' : item.priority}"  (click)="changeStatusCard(nameAddedCard.innerHTML, statusCard)">
 										</div>
-										<div class="ucd-cross"></div>
-										<p><!--1000 words (I level)-->{{item}}</p> 
+										<div class="ucd-cross" (click)="deleteUserCard(nameAddedCard.innerHTML, statusCard)"></div>
+										<p #nameAddedCard><!--1000 words (I level)-->{{item.usercard}}</p> 
 									</div>
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngFor = "let item of screenCatalog">
-								<div class="user-card-added" (click) = "addCardToUserCards(nameCardCatalog.innerHTML, statusAddedCard)">
+								<div class="user-card-added" (click) = "addCardToUserCards(nameCardCatalog.innerHTML, statusCard)">
 									<div class="uca-fon"><p #nameCardCatalog class = "display-card">{{item}}</p> <img class = "hidden-card" src = "img/plus-button.png"></div>
 								</div>
 							</div>
@@ -81,5 +81,5 @@
 				</div>
 			</div>
 		</div>
-		<p id = "status-added-card" #statusAddedCard></p>
+		<p id = "status-added-card" #statusCard></p>
 	</div>

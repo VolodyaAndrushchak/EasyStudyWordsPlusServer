@@ -14,8 +14,6 @@ export class User {
 	constructor(private http: Http) {}
 	
 	isThereEmail(nameUser, passUser, userMail){
-		
-		//var locUrl = "/isemail";
 		var locData = {
 			nameUser: nameUser, 
 			passUser: passUser, 
@@ -28,7 +26,6 @@ export class User {
 	}
 	
 	confirmRegist(registrEmailPass){
-		//var locUrl = "/confirmRegist";
 		var locData = {
 			pass: registrEmailPass
 		};
@@ -38,7 +35,6 @@ export class User {
 	}
 	
 	loginAction(userEmail, userPass, rememberme) {
-		//var locUrl = "/login";
 		var locData = {
 			useremail: userEmail,
 			password: userPass,
@@ -59,9 +55,15 @@ export class User {
 		return this.http.get("/logout").map(res => res.json());
 	}
 	
+	getUserName(){
+		return this.http.get("/cabinet/getUserName").map(res => res.json());
+	}
+	
+	getPriorityCard(){
+		return this.http.get("/cabinet/getPrCard").map(res => res.json());
+	}
 	
 	getCatalogCards(){
-		//var locUrl = "/cabinet/getCatalog";
 		return this.http.get("/cabinet/getCatalog").map(res => res.json());
 	}
 	
@@ -70,5 +72,17 @@ export class User {
 		headers.append('Content-Type', 'application/json');
 		return this.http.post("/cabinet/addCard", JSON.stringify({mustAddCard: card}), {headers: headers}).map(res => res.json());
 	}
-
+	
+	delUserCard(card){
+		return this.http.delete("/cabinet/deleteCard?delCard=" + card).map(res => res.json());
+	}
+	
+	changePriorityCard(card){
+		var locData = {
+			card: card
+		};
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.patch("/cabinet/chpriority", JSON.stringify(locData), {headers: headers}).map(res => res.json());
+	}
 }

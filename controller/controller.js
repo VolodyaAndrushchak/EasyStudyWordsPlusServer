@@ -74,14 +74,30 @@ module.exports = function(model, view, request, cheerio){
 		
 		addCardToUser: function(req, res){
 			model.createTableCard(req.session.passport.user, req.body.mustAddCard, function(err, answerDB){
-				console.log(err);
 				if(err){res.status(500).send({success: false});}
 				else {
 					res.status(200).send({success: true});
 				}
 			});
-			
-			//model.addCardToUser(req.body.mustAddCard, );
+		},
+		
+		deleteUserCard: function(req, res){
+			model.deleteUserCard(req.session.passport.user, req.query.delCard, function(err, answerDB){
+				if(err){res.status(500).send({success: false});}
+				else {
+					res.status(200).send({success: true});
+				}
+			});
+		},
+		
+		changePriorityCard: function(req, res){
+			model.changePriorityCard(req.session.passport.user, req.body.card, function(err, answerDB){
+				if(err){res.status(500).send({success: false});}
+				else {
+					//set cookie - priority card - faster get necessary information
+					res.cookie('priority_card', answerDB[0].dbname, { path: '/', httpOnly: true, maxAge: 0x7FFFFFFF }).send({ success : true });
+				}
+			});
 		}
 	}			
 }

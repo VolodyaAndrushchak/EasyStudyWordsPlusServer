@@ -18,7 +18,6 @@ var User = (function () {
         this.http = http;
     }
     User.prototype.isThereEmail = function (nameUser, passUser, userMail) {
-        //var locUrl = "/isemail";
         var locData = {
             nameUser: nameUser,
             passUser: passUser,
@@ -29,7 +28,6 @@ var User = (function () {
         return this.http.post("/isemail", JSON.stringify(locData), { headers: headers }).map(function (res) { return res.json(); });
     };
     User.prototype.confirmRegist = function (registrEmailPass) {
-        //var locUrl = "/confirmRegist";
         var locData = {
             pass: registrEmailPass
         };
@@ -38,7 +36,6 @@ var User = (function () {
         return this.http.post("/confirmRegist", JSON.stringify(locData), { headers: headers }).map(function (res) { return res.json(); });
     };
     User.prototype.loginAction = function (userEmail, userPass, rememberme) {
-        //var locUrl = "/login";
         var locData = {
             useremail: userEmail,
             password: userPass,
@@ -56,14 +53,30 @@ var User = (function () {
         //var locUrl = "/logout";
         return this.http.get("/logout").map(function (res) { return res.json(); });
     };
+    User.prototype.getUserName = function () {
+        return this.http.get("/cabinet/getUserName").map(function (res) { return res.json(); });
+    };
+    User.prototype.getPriorityCard = function () {
+        return this.http.get("/cabinet/getPrCard").map(function (res) { return res.json(); });
+    };
     User.prototype.getCatalogCards = function () {
-        //var locUrl = "/cabinet/getCatalog";
         return this.http.get("/cabinet/getCatalog").map(function (res) { return res.json(); });
     };
     User.prototype.addCardToUserCards = function (card) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post("/cabinet/addCard", JSON.stringify({ mustAddCard: card }), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    User.prototype.delUserCard = function (card) {
+        return this.http.delete("/cabinet/deleteCard?delCard=" + card).map(function (res) { return res.json(); });
+    };
+    User.prototype.changePriorityCard = function (card) {
+        var locData = {
+            card: card
+        };
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.patch("/cabinet/chpriority", JSON.stringify(locData), { headers: headers }).map(function (res) { return res.json(); });
     };
     User = __decorate([
         core_1.Injectable(), 

@@ -120,7 +120,7 @@ app.post('/login', function(req, res, next) {
 			 var token = generator.generate({length: 64, numbers: true});
     		 taskModel.writeTokenByEmail(token, req.body.useremail, function(err) {
 			  	if (err) { /*return done(err);*/ }
-			  	res.cookie('remember_me', token, { path: '/', httpOnly: true, maxAge: 604800000 }).send({ success : true, message : 'authentication succeeded' }); // 7 days
+			  	res.cookie('remember_me', token, { path: '/', httpOnly: true, maxAge: 6048000000 }).send({ success : true, message : 'authentication succeeded' }); // 7 days
 			}(req, res));
         }
 		else {
@@ -149,8 +149,12 @@ app.get('/cabinet', mustBeAuthenticated);
 app.get('/cabinet/*', mustBeAuthenticated);
 
 app.get('/cabinet', controllerUser.okCabinter);
+app.get('/cabinet/getUserName', controllerUser.getUserName);
+app.get('/cabinet/getPrCard', controllerUser.getPriorityCard);
 app.get('/cabinet/getCatalog', controller.getCatalog);
 app.post('/cabinet/addCard', controller.addCardToUser);
+app.delete('/cabinet/deleteCard', controller.deleteUserCard);
+app.patch('/cabinet/chpriority', controller.changePriorityCard);
 
 app.post('/isemail', controllerUser.isEmail);
 app.post('/confirmRegist', controllerUser.confirmRegist);

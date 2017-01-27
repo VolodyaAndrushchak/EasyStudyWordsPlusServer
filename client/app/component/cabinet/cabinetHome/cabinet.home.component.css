@@ -73,7 +73,7 @@
     float: left;
 	
 	border-radius: 4px;
-	
+	cursor: pointer;
 }
 
 .priority-card-red {
@@ -195,5 +195,9 @@
 	margin-top: 30px;
 	color: darkred;
 	font-weight: bolder;
+}
+
+.status-priority-card {
+	color: darkgreen;
 }
 /*---  end user exist card ---*/
