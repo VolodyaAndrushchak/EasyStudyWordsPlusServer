@@ -1,30 +1,130 @@
 module.exports = function(pool){
 	return {
 
-		getNewWords: function(callback){
+		getNewWords: function(idUser, priorityCard, callback){
+
+			var userCard = {
+				name: idUser + priorityCard,
+				col_id: idUser + priorityCard + ".id",
+				col_stnew: idUser + priorityCard + ".stnew"
+			};
+			var genCard = {
+				name: priorityCard,
+				col_id: priorityCard + ".id",
+				col_english: priorityCard + ".english",
+				col_transcription: priorityCard + ".transcription",
+				col_translation: priorityCard + ".translation"
+				
+			};
+			var colums = [genCard.col_english, genCard.col_transcription, genCard.col_translation];
 			
-			pool.query("SELECT wordfirst1000.english, wordfirst1000.transcription, wordfirst1000.translation FROM wordfirst1000 INNER JOIN usertablewords ON wordfirst1000.id = usertablewords.id WHERE usertablewords.stnew = 1 LIMIT 6", callback);
+			pool.query("SELECT ?? FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = 1 LIMIT 6", [colums, genCard.name, userCard.name, genCard.col_id, userCard.col_id, userCard.col_stnew], callback);
 		},
 		
-		getFamiliarWords: function(addWords, callback){
-			pool.query("SELECT wordfirst1000.english, wordfirst1000.transcription, wordfirst1000.translation FROM wordfirst1000 INNER JOIN usertablewords ON wordfirst1000.id = usertablewords.id WHERE usertablewords.stfamiliar = 1 LIMIT " + addWords, callback);
+		getFamiliarWords: function(idUser, priorityCard, addWords, callback){
+			
+			var userCard = {
+				name: idUser + priorityCard,
+				col_id: idUser + priorityCard + ".id",
+				col_stfamiliar: idUser + priorityCard + ".stfamiliar"
+			};
+			var genCard = {
+				name: priorityCard,
+				col_id: priorityCard + ".id",
+				col_english: priorityCard + ".english",
+				col_transcription: priorityCard + ".transcription",
+				col_translation: priorityCard + ".translation"
+				
+			};
+			var colums = [genCard.col_english, genCard.col_transcription, genCard.col_translation];
+			
+			pool.query("SELECT ?? FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = 1 LIMIT ?", [colums, genCard.name, userCard.name, genCard.col_id, userCard.col_id, userCard.col_stfamiliar, addWords], callback);
 		},
 		
-		getIntermediateWords: function(addWords, callback) {
-			pool.query("SELECT wordfirst1000.english, wordfirst1000.transcription, wordfirst1000.translation FROM wordfirst1000 INNER JOIN usertablewords ON wordfirst1000.id = usertablewords.id WHERE usertablewords.stintermediate = 1 LIMIT " + addWords, callback);
+		getIntermediateWords: function(idUser, priorityCard, addWords, callback) {
+			
+			var userCard = {
+				name: idUser + priorityCard,
+				col_id: idUser + priorityCard + ".id",
+				col_stintermediate: idUser + priorityCard + ".stintermediate"
+			};
+			var genCard = {
+				name: priorityCard,
+				col_id: priorityCard + ".id",
+				col_english: priorityCard + ".english",
+				col_transcription: priorityCard + ".transcription",
+				col_translation: priorityCard + ".translation"
+				
+			};
+			var colums = [genCard.col_english, genCard.col_transcription, genCard.col_translation];
+			
+			pool.query("SELECT ?? FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = 1 LIMIT ?", [colums, genCard.name, userCard.name, genCard.col_id, userCard.col_id, userCard.col_stintermediate, addWords], callback);
 		},
 		
-		getAlmostKnowWords: function(addWords, callback){
-			pool.query("SELECT wordfirst1000.english, wordfirst1000.transcription, wordfirst1000.translation FROM wordfirst1000 INNER JOIN usertablewords ON wordfirst1000.id = usertablewords.id WHERE usertablewords.stalmostknow = 1 LIMIT " + addWords, callback);
+		getAlmostKnowWords: function(idUser, priorityCard, addWords, callback){
+			
+			var userCard = {
+				name: idUser + priorityCard,
+				col_id: idUser + priorityCard + ".id",
+				col_stalmostknow: idUser + priorityCard + ".stalmostknow"
+			};	
+			var genCard = {
+				name: priorityCard,
+				col_id: priorityCard + ".id",
+				col_english: priorityCard + ".english",
+				col_transcription: priorityCard + ".transcription",
+				col_translation: priorityCard + ".translation"
+			};
+			var colums = [genCard.col_english, genCard.col_transcription, genCard.col_translation];
+			
+			pool.query("SELECT ?? FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = 1 LIMIT ?", [colums, genCard.name, userCard.name, genCard.col_id, userCard.col_id, userCard.col_stalmostknow, addWords], callback);
 		},
 		
-		getStatusWord: function(word, callback) {
-			pool.query("SELECT * FROM usertablewords INNER JOIN wordfirst1000 ON wordfirst1000.id = usertablewords.id WHERE wordfirst1000.english = ?", [word], callback);
+		getStatusWord: function(priorityCard, idUser, word, callback) {
+			var userCard = {
+				name: idUser + priorityCard,
+				col_id: idUser + priorityCard + ".id"
+			};
+			
+			var wordsCard = {
+				name: priorityCard,
+				col_id: priorityCard + ".id",
+				col_english: priorityCard + ".english"
+			}
+			
+			
+			pool.query("SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = ?", [userCard.name, wordsCard.name, wordsCard.col_id, userCard.col_id, wordsCard.col_english, word], callback);
 		},
 		
-		changeStatusWord: function(prevCol, nextCol, idWord, callback){
-			pool.query("UPDATE usertablewords SET ?? = 0 WHERE id = ?", [prevCol, idWord], function(err, answerDB){
-				pool.query("UPDATE usertablewords SET ?? = 1 WHERE id = ?", [nextCol, idWord]);
+		getFirstCard: function(idUser, callback){
+			var nameTable = idUser + "ustab";
+			pool.query("SELECT nameTable FROM ?? LIMIT 1", [nameTable], function(err, answerDB){
+				if (!err && answerDB.length != 0){
+					pool.query("SELECT dbname FROM realtablename WHERE realname = ?", [answerDB[0].nameTable], callback);				
+				}
+				else {
+					pool.query("SELECT nameTable FROM ?? LIMIT 0", [nameTable], callback);
+				}
+			});
+		},
+		
+		getPriorityCard: function(idUser, callback){
+			var locNameTable = idUser + "ustab";
+			pool.query("SELECT nameTable from ?? WHERE priority = 1", [locNameTable], function(err, answerDB){
+				if (!err && answerDB.length != 0){
+					pool.query("SELECT dbname FROM realtablename WHERE realname = ?", [answerDB[0].nameTable], callback);				
+				}
+				else {
+					pool.query("SELECT nameTable from ?? LIMIT 0", [locNameTable], callback);
+				}
+			});
+		},
+
+		changeStatusWord: function(priorityCard, idUser, prevCol, nextCol, idWord, callback){
+			var locNameTable = idUser + priorityCard;
+			
+			pool.query("UPDATE ?? SET ?? = 0 WHERE id = ?", [locNameTable, prevCol, idWord], function(err, answerDB){
+				pool.query("UPDATE ?? SET ?? = 1 WHERE id = ?", [locNameTable, nextCol, idWord]);
 			});
 		},
 		
@@ -81,6 +181,8 @@ module.exports = function(pool){
 			});
 		},
 		
+		
+		
 		//model for users
 		
 		isEmail: function(user_mail, callback){
@@ -126,11 +228,6 @@ module.exports = function(pool){
 		},
 		getUserName: function(idUser, callback){
 			pool.query("SELECT nameUser FROM users WHERE unIdUser = ?", [idUser], callback);
-		},
-		getPriorityCard: function(idUser, callback){
-			var locNameTable = idUser + "ustab";
-			pool.query("SELECT nameTable from ?? WHERE priority = 1", [locNameTable], callback);
 		}
-	
 	}
 }

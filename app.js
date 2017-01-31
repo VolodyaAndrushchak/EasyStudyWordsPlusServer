@@ -95,6 +95,7 @@ passport.use(new RememberMeStrategy({
   },
   function(user, done) {
     var token = generator.generate({length: 64, numbers: true});
+	console.log(user);
     taskModel.writeToken(token, user[0].unIdUser, function(err, Newuser) {
       if (err) { return done(err); }
       return done(null, token);
